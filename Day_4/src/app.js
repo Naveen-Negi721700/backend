@@ -4,7 +4,7 @@ import express from "express"
 const app=express();
 
 app.use(cors({
-    origin: Process.env.CORS_ORIGIN,
+    origin: process.env.CORS_ORIGIN,
     credentials:true,
 }))
 
@@ -21,7 +21,7 @@ import routes from "./routes/user.routes.js";
 
 // routes declaration
 // we not use app.get because we diffrenceate routes and controlers use means we are using middleware
-app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/users", routes);
 
 // like http://localhost:8000/api/v1/user/login
 // like http://localhost:8000/api/v1/user/register
