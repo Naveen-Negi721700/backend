@@ -1,5 +1,4 @@
-import { v2 as cloudinary } from "cloudinary"
-import { log } from "node:console";
+import { v2 as cloudinary } from "cloudinary";
 import fs from "node:fs";
 
 cloudinary.config({
@@ -8,23 +7,35 @@ cloudinary.config({
     api_secret: process.env.CLOUDINEARY_API_SECRET
 });
 
-const uploadOnCloudinary=async (localFilePath)=>{
+
+
+console.log("Cloudinary config:", cloudinary.config());
+
+
+const uploadOnCloudinary = async (localFilePath) => {
     try {
-        if(!localFilePath)return null;
-       const response= await cloudinary.uploader.upload(
-        localFilePath, {
-        resource_type:'auto',
-    }
-)
-console.log("file uploded successfully", response.url);
-return response
+        if (!localFilePath) return null;
 
-        
+        const response = await cloudinary.uploader.upload(
+            localFilePath,
+            {
+                resource_type: "auto"
+            }
+        );
+
+        console.log("File uploaded successfully:", response.url);
+
+        return response;
+
     } catch (error) {
-        fs.unlinkSync(localFilePath)  //remove the locally saved tempery file asthe upload operation got failed
-        return null
+        console.log("Cloudinary upload error:", error);
+
+        if (localFilePath && fs.existsSync(localFilePath)) {
+            fs.unlinkSync(localFilePath);
+        }
+
+        return null;
     }
-}
+};
 
-
-export {uploadOnCloudinary}
+export { uploadOnCloudinary };

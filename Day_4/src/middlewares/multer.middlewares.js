@@ -1,5 +1,5 @@
 import multer from "multer";
-// import crypto from "crypto"
+import crypto from "crypto"
 
 // const crypto = require('crypto')
 
