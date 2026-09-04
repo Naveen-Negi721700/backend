@@ -9,7 +9,7 @@ cloudinary.config({
 
 
 
-console.log("Cloudinary config:", cloudinary.config());
+// console.log("Cloudinary config:", cloudinary.config());
 
 
 const uploadOnCloudinary = async (localFilePath) => {
@@ -25,6 +25,7 @@ const uploadOnCloudinary = async (localFilePath) => {
 
         console.log("File uploaded successfully:", response.url);
 
+        fs.unlinkSync(localFilePath);
         return response;
 
     } catch (error) {
