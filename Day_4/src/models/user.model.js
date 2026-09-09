@@ -48,6 +48,8 @@ const userSchema=new Schema({
 
 },{timestamps:true})
 
+//                        creating a hooks 
+
 userSchema.pre("save",async function (){
   if(!this.isModified("password"))return
 
